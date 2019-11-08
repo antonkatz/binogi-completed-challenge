@@ -44,4 +44,8 @@ return [
         ],
     ],
 
+    'spotify' => [
+        'secret' => env('SPOTIFY_SECRET')
+    ],
+
 ];
