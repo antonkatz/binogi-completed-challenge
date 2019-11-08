@@ -43,8 +43,12 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\": "tests/"
-        }
+            "Tests\\": "tests/",
+            "App\\": "app/"
+        },
+        "classmap": [
+            "tests/TestCase.php"
+        ]
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
