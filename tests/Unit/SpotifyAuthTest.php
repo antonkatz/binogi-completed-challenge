@@ -19,6 +19,14 @@ class SpotifyAuthTest extends TestCase
     }
 
     /**
+    * The Client ID should be retrieved successfully, independent of any framework
+    */
+    public function test_getClientId() {
+        // a shorthad approach: get of an empty Option will throw an error
+        $this->assertTrue(!empty(Spotify::getClientId()->get()));
+    }
+
+    /**
      * Authorization header string should be generated correctly.
      */
     public function generateAuthHeaderTest()
