@@ -46,7 +46,7 @@ return [
 
     'spotify' => [
         'secret' => env('SPOTIFY_SECRET'),
-        'clientid' => env('SPOTIFY_CLINET_ID'),
+        'clientid' => env('SPOTIFY_CLIENT_ID'),
     ],
 
 ];
