@@ -15,7 +15,7 @@ class SpotifyAuthTest extends TestCase
     public function test_loadSecretKey() {
         $key = Spotify::getSecretKey();
         $this->assertInstanceOf(Some::class, $key);
-        $this->assertTrue(!empty($key.get()));
+        $this->assertTrue(!empty($key->get()));
     }
 
     /**
