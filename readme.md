@@ -1,3 +1,7 @@
+# Completed Code Challenge Notes
+- Environmental variables containing Spotify client id and secret should be set automatically for testing as to avoid using production credentails.
+
+
 # Laravel Code Challenge
 
 This code test involves the creation of a working project with the help of the Laravel framework.
@@ -8,7 +12,7 @@ This code challenge does not involve any use of database connections. Therefore,
 
 1. Option (php cli)
 - On Debian/Ubuntu machines, you can simply install everyting needed via apt, given you have the correct apt repository configured:
-    - `sudo add-apt-repository -y ppa:ondrej/php`    
+    - `sudo add-apt-repository -y ppa:ondrej/php`
     - `sudo apt install composer php7.3-common php7.3-cli php7.3-json php7.3-mbstring php7.3-xml php7.3-opcache php7.3-readline php7.3-pdo php7.3-ctype php7.3-bcmath`
     - Open a terminal and clone this repository into any directory on your machine, then and run `composer install` and `php artisan serve --port=8888` to start the web server, reachable under `http://localhost:8888`
 2. Option (Homestead)
@@ -17,7 +21,7 @@ This code challenge does not involve any use of database connections. Therefore,
 - Now you clone this repository and simply run the command `vagrant up`, then `vagrant ssh -c "cd ~/code; composer install"` and your application will be available under the address http://homestead.test
 
 ### Restrictions and Requirements
-1. Please do **NOT** use any JS/AJAX to solve this challenge but build it in PHP. 
+1. Please do **NOT** use any JS/AJAX to solve this challenge but build it in PHP.
 1. You can use any libraries you can find.
 1. This challenge doesn't focus on the UI. Do not spend too much time on layout/css.
 1. You should focus on code quality and structure. If possible and timely reasonable, also add tests.
