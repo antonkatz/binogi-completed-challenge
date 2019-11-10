@@ -22,6 +22,8 @@ class TokenContainerTest extends TestCase
         $token = $tokenContainer->getToken();
         $this->assertNotEmpty($token->get());
         $this->assertGreaterThan(0, $tokenContainer->getExpiresAt());
+        $this->assertEquals(1, $tokenContainer->retrieveCallCount);
+        $this->assertFalse($tokenContainer->hasSentMail);
     }
 
     /**
@@ -39,6 +41,7 @@ class TokenContainerTest extends TestCase
             $this->assertNotEmpty($tokenContainer->getToken()->get());
             $this->assertGreaterThan($lastExpiry, $tokenContainer->getExpiresAt());
             $lastExpiry = $tokenContainer->getExpiresAt();
+            sleep(1);
         }
         $this->assertEquals($callCount, $tokenContainer->retrieveCallCount);
     }
@@ -60,13 +63,16 @@ abstract class BaseTestTokenContainer extends TokenContainer {
     public $hasSentMail = false;
 
     protected function sendMailWarning($message) {
-        self::$hasSentMail = true;
+        $this->hasSentMail = true;
     }
 }
 
 class ValidTestTokenContainer extends BaseTestTokenContainer {
+    public $retrieveCallCount = 0;
+
     protected function retrieveToken() {
-        $t = new class implements RawToken {
+        $this->retrieveCallCount += 1;
+        $t = new class {
             public $access_token = 'valid_token';
             public $expires_in = 3600;
         };
@@ -76,15 +82,8 @@ class ValidTestTokenContainer extends BaseTestTokenContainer {
 }
 
 class RefreshTestTokenContainer extends ValidTestTokenContainer {
-    public $retrieveCallCount = 0;
-
     public function isTokenValid() {
         return false;
-    }
-
-    protected function retrieveToken() {
-        $this->retrieveCallCount += 1;
-        parent::retrieveToken();
     }
 }
 
