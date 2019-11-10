@@ -20,7 +20,8 @@ class TokenContainerTest extends TestCase
     public function test_retrieveValidToken() {
         $tokenContainer = new ValidTestTokenContainer();
         $token = $tokenContainer->getToken();
-        $this->assertNotEmpty($token->get());
+        $this->assertNotEmpty($token->get()->token);
+        $this->assertNotEmpty($token->get()->type);
         $this->assertGreaterThan(0, $tokenContainer->getExpiresAt());
         $this->assertEquals(1, $tokenContainer->retrieveCallCount);
         $this->assertFalse($tokenContainer->hasSentMail);
@@ -74,6 +75,7 @@ class ValidTestTokenContainer extends BaseTestTokenContainer {
         $this->retrieveCallCount += 1;
         $t = new class {
             public $access_token = 'valid_token';
+            public $token_type = 'bearer';
             public $expires_in = 3600;
         };
 
