@@ -1,6 +1,6 @@
 # Completed Code Challenge Notes
 - Environmental variables containing Spotify client id and secret should be set automatically for testing as to avoid using production credentails.
-
+- Within a more formal environment, I would have done much more rebasing of commits. For the challange I chose not to allowing to see the exact history of my actions.
 
 # Laravel Code Challenge
 
