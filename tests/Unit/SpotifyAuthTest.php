@@ -4,6 +4,7 @@ namespace Tests\Unit;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 use App\RemoteServices\Spotify;
 use PHPOption\{Some};
 
@@ -27,11 +28,17 @@ class SpotifyAuthTest extends TestCase
     }
 
     /**
-     * Authorization header string should be generated correctly.
+     * Authorization header string should be generated.
+     * Keep in mind, correctness can only be certain of after the access token is obtained.
      */
-    public function generateAuthHeaderTest()
+    public function test_generateAuthHeader()
     {
-
+        $h = Spotify::generateAuthHeader();
+        $this->assertStringStartsWith('Basic', $h);
+        $this->assertTrue(
+            // 10 is an arbitrary number simply to check that string contains more than 'Basic'
+            Str::length($h) > 10
+        );
     }
 
     /**
