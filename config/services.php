@@ -47,6 +47,7 @@ return [
     'spotify' => [
         'secret' => env('SPOTIFY_SECRET'),
         'clientid' => env('SPOTIFY_CLIENT_ID'),
+        'access-token-endpoint' => 'https://accounts.spotify.com/api/token',
     ],
 
 ];
