@@ -59,7 +59,7 @@ class SpotifyAuth {
     /**
     * Sends a request to Spotify asking for the access token.
     * In case of an error logs it, but does not throw an exception.
-    * @return Option of object in the JSON format from Spotify docs.
+    * @return Option of object in the JSON format from Spotify docs containing `access_token`, `expires_in`, `token_type` values.
     */
     public static function retrieveAccessToken() {
         // todo: figure out if sending an async request will have a performance benefit
