@@ -45,6 +45,7 @@ class TokenContainerTest extends TestCase
             sleep(1);
         }
         $this->assertEquals($callCount, $tokenContainer->retrieveCallCount);
+        $this->assertFalse($tokenContainer->hasSentMail);
     }
 
     /**
