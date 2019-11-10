@@ -45,6 +45,8 @@ class SpotifyAuthTest extends TestCase
     * Access token should be retrieved successfully from Spotify API.
     */
     public function retrieveAccessTokenTest() {
-
+        $token = Spotify::retrieveAccessToken();
+        $this.assertNotEmpty($token->getToken());
+        $this.assertGreaterThan(0, $token->getLifespan());
     }
 }
