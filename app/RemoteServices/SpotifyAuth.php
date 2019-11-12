@@ -90,6 +90,5 @@ class SpotifyAuth {
             Log::error($msg);
             return None::create();
         }
-        return null;
     }
 }
