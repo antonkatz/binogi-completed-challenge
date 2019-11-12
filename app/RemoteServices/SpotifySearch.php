@@ -18,13 +18,12 @@ class SpotifySearch {
     /** Url encoded */
     private $searchTerm;
     private $searchType;
-    /** Could be made settable on initialization. */
-    private $pageSize = 20;
-
-    private $currentOffset;
 
     private $totalItems;
-    private $currentPage;
+
+    /** Could be made settable on initialization. */
+    private $pageSize = 20;
+    private $currentPage = -1;
 
     private function generateHeaders() {
         $token = $this->tokenContainer->getToken()->get();
@@ -97,18 +96,11 @@ class SpotifySearch {
     * @return array the next set of items in the search with a maximum count set by `getPageSize()`
     */
     public function getNextPage() {
-        if ($this->totalItems === null || $this->currentOffset === null ||
-         $this->totalItems > $this->currentOffset) {
-            if ($this->currentOffset === null) {
-                $this->currentOffset = 0;
-            } else {
-                $this->currentOffset += $this->getPageSize();
-            }
-
-            $items = $this->sendRequest($this->currentOffset);
-            $itemCount = sizeof($items);
-
-            return Option::fromValue($items);
+        if ($this->totalItems === null ||
+            $this->totalItems > $this->currentPage * $this->getPageSize()) {
+            // this relies on currentPage being instantiated to -1
+            $this->currentPage += 1;
+            return $this->getPage($this->currentPage);
         } else {
             return None::create();
         }
@@ -119,20 +111,22 @@ class SpotifySearch {
     * @return array items that were returned by `getNextPage()` before the last call to it
     */
     public function getPrevPage() {
-        if ($this->currentOffset !== null && $this->currentOffset > 0) {
-            $offset = $this->currentOffset - $this->getPageSize();
-            if ($offset < 0) {
-                $offset = 0;
-            }
-
-            $items = $this->sendRequest($offset);
-            $itemCount = sizeof($items);
-
-            $this->currentOffset = $offset;
-
-            return Option::fromValue($items);
+        if ($this->currentPage !== null && $this->currentPage > 0) {
+            $this->currentPage -= 1;
+            return $this->getPage($this->currentPage);
         } else {
             return None::create();
         }
+    }
+
+    public function getPage($pageNum) {
+        $offset = 0;
+        // cannot be negative
+        if ($pageNum > 0) {
+            $offset = $pageNum * $this->getPageSize();
+        }
+
+        $items = $this->sendRequest($offset);
+        return Option::fromValue($items);
     }
 }
