@@ -52,6 +52,9 @@ class SpotifyAuth {
     public static function generateAuthHeader() {
         $secret = self::getSecretKey()->get();
         $id = self::getClientId() -> get();
+        if (empty($secret) || empty($id)) {
+            throw new \Exception('Missing Spotify secret or client id');
+        }
         $b64 = base64_encode($id . ":" . $secret);
         return 'Basic ' . $b64;
     }
