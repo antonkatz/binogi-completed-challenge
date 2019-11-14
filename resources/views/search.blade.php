@@ -27,6 +27,23 @@
     <div class="result">
         Your Search Term Was: <b>{{$searchTerm}}</b>
     </div>
+
+
+    @foreach ($items as $type => $itemsOfType)
+        <div class="container {{$type}}">
+            <h2>{{$typeToDisplayName[$type]}}</h2>
+            <ul class="list {{$type}}">
+                @foreach($itemsOfType as $item)
+                    <li class="item">
+                        <a href='{{$item->infoLink}}'>
+                            <img src={{$item->imageUrl}} height=30/>
+                            <span>{{$item->name}}</span>
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+    @endforeach
 </div>
 </body>
 </html>
