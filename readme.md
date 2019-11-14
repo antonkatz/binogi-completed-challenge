@@ -10,6 +10,8 @@ After, run the tests with `./vendor/bin/phpunit` and the server with `php artisa
 - Testing of generated HTML pages was not implemented for the challange. 
 - Spellcheck and formatting were not available to me, since I had to use Gitpod rather than a proper work environment.
 
+- UI should have pagination conrtols and navigation between pages, which it currently does not.
+
 # Laravel Code Challenge
 
 This code test involves the creation of a working project with the help of the Laravel framework.
