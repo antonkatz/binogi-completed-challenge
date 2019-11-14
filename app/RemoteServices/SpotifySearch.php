@@ -60,14 +60,16 @@ class SpotifySearch {
     * Sets up search instance to be ready to retrieve results with `getNextPage()`
     * @param searchTerm string to perform the search on
     * @param searchType Spotify has sereval types of items that can be searched: artist, album, track
+    * @param tokenContainer which provides the authentication token for requsts to the API.
+    *                       This is a flawed design: see notes in readme
     */
-    public function __construct($searchTerm, $searchType) {
+    public function __construct($searchTerm, $searchType, SpotifyTokenContainer $tokenContainer) {
         $baseUrl = config('services.spotify.api-base-url') . '/search';
 
         $this->client = new Client([
             'base_uri' => $baseUrl
         ]);
-        $this->tokenContainer = new SpotifyTokenContainer();
+        $this->tokenContainer = $tokenContainer;
         $this->searchTerm = urlEncode($searchTerm);
         if (!in_array($searchType, $this::$ALLOWED_SEARCH_TYPES)) {
             // todo. make exception a specific class
