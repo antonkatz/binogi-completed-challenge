@@ -50,12 +50,12 @@ class SpotifyAuth {
     * @return string value for the Authorization header formatted as specified in Spotify docs.
     */
     public static function generateAuthHeader() {
-        $secret = self::getSecretKey()->get();
-        $id = self::getClientId() -> get();
-        if (empty($secret) || empty($id)) {
+        $secret = self::getSecretKey();
+        $id = self::getClientId();
+        if (($secret instanceof None) || ($id instanceof None)) {
             throw new \Exception('Missing Spotify secret or client id');
         }
-        $b64 = base64_encode($id . ":" . $secret);
+        $b64 = base64_encode($id->get() . ":" . $secret->get());
         return 'Basic ' . $b64;
     }
 
