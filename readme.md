@@ -1,6 +1,14 @@
 # Completed Code Challenge Notes
-- Environmental variables containing Spotify client id and secret should be set automatically for testing as to avoid using production credentails.
-- Within a more formal environment, I would have done much more rebasing of commits. For the challange I chose not to allowing to see the exact history of my actions.
+To run please set `SPOTIFY_SECRET` and `SPOTIFY_CLIENT_ID` environment variables.
+After, run the tests with `./vendor/bin/phpunit` and the server with `php artisan serve`
+
+- In a proper setup, environmental variables containing Spotify client id and secret should be set based on environment, so that tests do not use production credentails.
+- Within a more formal environment, I would have done much more rebasing of commits. For the challange I chose not to, thus allowing to see the exact history of my actions.
+- The SpotifySearch class should consist of static methods only; I would like to discuss this when we go over the challenge.
+
+- Private functions are generally not commented; they are simply given discriptive names.
+- Testing of generated HTML pages was not implemented for the challange. 
+- Spellcheck and formatting were not available to me, since I had to use Gitpod rather than a proper work environment.
 
 # Laravel Code Challenge
 
