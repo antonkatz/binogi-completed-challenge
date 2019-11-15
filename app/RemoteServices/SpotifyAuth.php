@@ -7,11 +7,7 @@ use App\RemoteServices\WithClientTrait;
 
 use \PHPOption\{Option, None};
 use \GuzzleHttp\Psr7\Request;
-<<<<<<< HEAD
 use \GuzzleHttp\Exception\RequestException;
-=======
-use Guzzle\Http\Exception\ClientErrorResponseException;
->>>>>>> 998bad5883d0d149724befbd9752e0495caddb4f
 
 /**
 * Methods for retrieving the access token from Spotify.
@@ -75,11 +71,7 @@ class SpotifyAuth {
             $completed = self::getClient()->send($req);
             $body = $completed->getBody();
             return Option::fromValue(json_decode($body));
-<<<<<<< HEAD
         } catch (RequestException $e) {
-=======
-        } catch (ClientErrorResponseException $e) {
->>>>>>> 998bad5883d0d149724befbd9752e0495caddb4f
             $resp = $e->getResponse();
             $msg = 'Request to retrive Spotify access token failed: ' .
                 $resp->getStatusCode() . ' ' . $resp->getReasonPhrase();
