@@ -18,7 +18,7 @@ use GuzzleHttp\Psr7\Response;
 /**
 * Tests for SpotifyInfo class which retrievs detailed info about any Spotify object.
 */
-class SpotifyAuthTest extends TestCase
+class SpotifyInfoTest extends TestCase
 {
     private static $ARTIST_HREF = 'aHR0cHM6Ly9hcGkuc3BvdGlmeS5jb20vdjEvYXJ0aXN0cy82TWEzWDhiOVR0U1NLakZlaHlJNGV6';
     private static $ALBUM_HREF = 'aHR0cHM6Ly9hcGkuc3BvdGlmeS5jb20vdjEvYWxidW1zLzJCZXlNUTIwNlBreFFocE1Fd0pFeEI=';
