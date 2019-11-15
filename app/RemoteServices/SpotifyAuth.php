@@ -78,4 +78,16 @@ class SpotifyAuth {
             return None::create();
         }
     }
+
+    /**
+    * Helper method for generating headers to be passed into an HTTP client.
+    * @return array of authorization realted headers to be used in request to Spotify
+    */
+    public static function generateAccessTokenHeaders(TokenContainer $tokenContainer) {
+        $token = $tokenContainer->getToken()->get();
+        $authHeader = $token->type . ' ' . $token->token;
+        return [
+                    'Authorization' => $authHeader,
+        ];
+    }
 }
