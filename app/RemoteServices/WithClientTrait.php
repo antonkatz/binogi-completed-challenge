@@ -40,4 +40,8 @@ trait WithClientTrait {
         self::$client = $client;
     }
 
+    public static function resetClient() {
+        self::$client = null;
+    }
+
 }

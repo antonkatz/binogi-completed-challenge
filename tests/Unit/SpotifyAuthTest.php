@@ -73,6 +73,8 @@ class SpotifyAuthTest extends TestCase
         $token = SpotifyAuth::retrieveAccessToken();
         $this->assertInstanceOf(None::class, $token);
 
+        SpotifyAuth::resetClient();
+
         // todo: test that logging indeed occurs (appears to be non-trivial)
     }
 }
