@@ -26,12 +26,7 @@ class SpotifySearch {
     private $currentPage = -1;
 
     private function generateHeaders() {
-        $token = $this->tokenContainer->getToken()->get();
-        $authHeader = $token->type . ' ' . $token->token;
-        return [
-                    'Authorization' => $authHeader,
-                    'Content-Type' => 'application/x-www-form-urlencoded'
-        ];
+        return SpotifyAuth::generateAccessTokenHeaders($this->tokenContainer);
     }
 
     private function generateQuery($offset) {
