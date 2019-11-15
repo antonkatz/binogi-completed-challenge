@@ -3,29 +3,16 @@
 namespace App\RemoteServices;
 
 use Illuminate\Support\Facades\Log;
+use App\RemoteServices\WithClientTrait;
+
 use \PHPOption\{Option, None};
-use \GuzzleHttp\Client;
 use \GuzzleHttp\Psr7\Request;
 
 /**
 * Methods for retrieving the access token from Spotify.
 */
 class SpotifyAuth {
-    private static $client = null;
-
-    private static function getClient() {
-        if (self::$client == null) {
-            self::$client = new Client();
-        }
-        return self::$client;
-    }
-
-    /**
-    * The main use of this function is to allow mocking in tests.
-    */
-    public static function setClient(Client $client) {
-        self::$client = $client;
-    }
+    use WithClientTrait;
 
     /**
     * @return Option filled with string.
