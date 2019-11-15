@@ -49,6 +49,13 @@ class TokenContainerTest extends TestCase
     }
 
     /**
+    * Access token that has been valid, but has since expired should be discared and a new token aquired.
+    */
+    public function test_refreshExpiredAccessToken() {
+        // todo: pass a raw token object with a few seconds until expiry, wait, and check if refresh happens.
+    }
+
+    /**
     * If access token retrieval fails, the refresh function should try agian, and return an empty (None) value if it fails after max retries.
     * There should also be a warning mail sent to notify developers of the issue.
     */
