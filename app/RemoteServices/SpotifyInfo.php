@@ -11,13 +11,19 @@ use App\RemoteServices\WithClientTrait;
 class SpotifyInfo {
     use WithClientTrait;
 
+    /** Used to make sure that the singleton is set up just once */
+    private static $hasSetup = false;
+
     /**
     * Sets up the HTTP client with correct authentication details.
     * @param SpotifyTokenContainer which contains an application-wide Spotify access token
     */
     public static function setUp(SpotifyTokenContainer $tokenContainer) {
-        $headers = SpotifyAuth::generateAccessTokenHeaders($tokenContainer);
-        self::setClientDefaults($headers);
+        if (!self::$hasSetup) {
+            $headers = SpotifyAuth::generateAccessTokenHeaders($tokenContainer);
+            self::setClientDefaults($headers);
+            self::$hasSetup = true;
+        }
     }
 
     /**
