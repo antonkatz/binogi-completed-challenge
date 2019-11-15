@@ -14,6 +14,8 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Psr7\Response;
 
+use Tests\Unit\Helpers\SingletonTokenContainer;
+
 
 /**
 * Tests for SpotifyInfo class which retrievs detailed info about any Spotify object.
@@ -35,8 +37,7 @@ class SpotifyInfoTest extends TestCase
     public function setUp(): void {
         if (!self::$hasSetup) {
             parent::setUp();
-            $tokenContainer = new SpotifyTokenContainer();
-            SpotifyInfo::setUp($tokenContainer);
+            SpotifyInfo::setUp(SingletonTokenContainer::get());
 
             self::$hasSetup = true;
         }

@@ -6,6 +6,7 @@ use Tests\TestCase;
 use PHPOption\{Some, None, Option};
 
 use App\RemoteServices\SpotifySearch;
+use Tests\Unit\Helpers\SingletonTokenContainer;
 
 /**
 * Tests for Spotify search, that acts as a wrapper around the API and performs pagination.
@@ -18,7 +19,7 @@ class SearchCommandsTest extends TestCase
     public function test_searchForward() {
         $results = [];
 
-        $searchInstance = new SpotifySearch('a', 'artist');
+        $searchInstance = new SpotifySearch('a', 'artist', SingletonTokenContainer::get());
         $this->assertGreaterThan(0, $searchInstance->getPageSize());
 
         $page = $searchInstance->getNextPage();
@@ -42,7 +43,7 @@ class SearchCommandsTest extends TestCase
     public function test_searchBackward() {
         $resultsForward = [];
 
-        $searchInstance = new SpotifySearch('a', 'artist');
+        $searchInstance = new SpotifySearch('a', 'artist', SingletonTokenContainer::get());
         $page = $searchInstance->getNextPage();
         $pageCount = 0;
         while($page instanceof Some && $pageCount < 3) {
@@ -80,7 +81,7 @@ class SearchCommandsTest extends TestCase
     */
     public function test_searchTypeNotAllowed() {
         $this->expectException(\Exception::class);
-        new SpotifySearch('any', 'not_allowed');
+        new SpotifySearch('any', 'not_allowed', SingletonTokenContainer::get());
     }
 
     /**
@@ -90,7 +91,7 @@ class SearchCommandsTest extends TestCase
         $types = ['track'];
 
         foreach ($types as $tk => $type) {
-            $searchInstance = new SpotifySearch('a', $type);
+            $searchInstance = new SpotifySearch('a', $type, SingletonTokenContainer::get());
             $results = $searchInstance->getNextPage()->get();
 
             foreach ($results as $ik => $item) {
