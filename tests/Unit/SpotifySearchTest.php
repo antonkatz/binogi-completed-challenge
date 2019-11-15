@@ -90,7 +90,6 @@ class SearchCommandsTest extends TestCase
         $types = ['track'];
 
         foreach ($types as $tk => $type) {
-            print $type . '\n';
             $searchInstance = new SpotifySearch('a', $type);
             $results = $searchInstance->getNextPage()->get();
 
